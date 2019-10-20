@@ -18,16 +18,25 @@ class PostState extends Union3Impl<Initial, Success, Failure> {
   factory PostState.failure() => PostState._(unions.third(Failure()));
 }
 
-class Initial extends Equatable {}
+class Initial extends Equatable {
+  @override
+  List<Object> get props => [];
+}
 
-class Failure extends Equatable {}
+class Failure extends Equatable {
+  @override
+  List<Object> get props => [];
+}
 
 class Success extends Equatable {
   final List<Post> posts;
   final bool hasReachedMax;
 
-  Success({
+  const Success({
     this.posts,
     this.hasReachedMax,
-  }) : super(<Object>[posts, hasReachedMax]);
+  });
+
+  @override
+  List<Object> get props => [posts, hasReachedMax];
 }

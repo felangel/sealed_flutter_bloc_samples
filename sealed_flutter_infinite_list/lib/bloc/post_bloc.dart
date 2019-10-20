@@ -33,7 +33,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   Stream<PostState> mapEventToState(PostEvent event) async* {
     yield* event.join<Stream<PostState>>(
       (Fetch fetch) async* {
-        yield* currentState.join<Stream<PostState>>(
+        yield* state.join<Stream<PostState>>(
           (Initial initial) => _mapInitialAndFetchToState(initial, fetch),
           (Success success) => _mapSuccessAndFetchToState(success, fetch),
           (Failure failure) => _mapFailureAndFetchToState(failure, fetch),

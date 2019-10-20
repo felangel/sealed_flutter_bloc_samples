@@ -5,5 +5,8 @@ class Post extends Equatable {
   final String title;
   final String body;
 
-  Post({this.id, this.title, this.body}) : super(<Object>[id, title, body]);
+  const Post({this.id, this.title, this.body});
+
+  @override
+  List<Object> get props => [id, title, body];
 }

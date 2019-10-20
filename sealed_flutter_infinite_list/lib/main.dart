@@ -29,7 +29,7 @@ class App extends StatelessWidget {
           body: BlocProvider(
             builder: (context) => PostBloc(
               postRepository: RepositoryProvider.of<PostRepository>(context),
-            )..dispatch(PostEvent.fetch()),
+            )..add(PostEvent.fetch()),
             child: HomePage(),
           ),
         ),
@@ -114,7 +114,7 @@ class _PostListState extends State<PostList> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
     if (maxScroll - currentScroll <= _scrollThreshold) {
-      _postBloc.dispatch(PostEvent.fetch());
+      _postBloc.add(PostEvent.fetch());
     }
   }
 }
