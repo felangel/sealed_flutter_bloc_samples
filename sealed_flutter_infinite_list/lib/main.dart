@@ -17,7 +17,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
-      builder: (context) => PostRepository(
+      create: (_) => PostRepository(
         httpClient: http.Client(),
       ),
       child: MaterialApp(
@@ -27,8 +27,8 @@ class App extends StatelessWidget {
             title: Text('Posts'),
           ),
           body: BlocProvider(
-            builder: (context) => PostBloc(
-              postRepository: RepositoryProvider.of<PostRepository>(context),
+            create: (context) => PostBloc(
+              postRepository: context.repository<PostRepository>(),
             )..add(PostEvent.fetch()),
             child: HomePage(),
           ),

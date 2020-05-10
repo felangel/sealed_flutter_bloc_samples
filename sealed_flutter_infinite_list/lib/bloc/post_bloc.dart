@@ -14,15 +14,13 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       : _postRepository = postRepository;
 
   @override
-  Stream<PostState> transformEvents(
+  Stream<Transition<PostEvent, PostState>> transformEvents(
     Stream<PostEvent> events,
-    Stream<PostState> Function(PostEvent event) next,
+    TransitionFunction<PostEvent, PostState> transitionFn,
   ) {
     return super.transformEvents(
-      (events as Observable<PostEvent>).debounceTime(
-        Duration(milliseconds: 500),
-      ),
-      next,
+      events.debounceTime(const Duration(milliseconds: 500)),
+      transitionFn,
     );
   }
 
